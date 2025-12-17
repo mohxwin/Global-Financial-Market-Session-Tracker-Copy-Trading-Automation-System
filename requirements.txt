@@ -1,0 +1,11 @@
+Django>=4.2,<5.0
+djangorestframework
+djangorestframework-simplejwt
+django-allauth
+django-otp
+qrcode
+cryptography
+django-ratelimit
+user-agents
+pyotp
+dj-rest-auth[with_social]
