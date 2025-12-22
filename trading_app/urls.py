@@ -21,7 +21,12 @@ from accounts.views import GoogleLoginJWTView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("accounts/", include("accounts.urls")),
+    path("api/accounts/", include("accounts.urls")),
+    path('api/notifications', include('notifications.urls')),
+    path('api/copy_trading', include('copy_trading.urls')),
+    path('api/referrals', include('referrals.urls')),
+    path('api/trading', include('trading.urls')),
+    path('api/wallets', include('wallets.urls')),
     path("auth/", include("allauth.urls")),
     path("api/brokers/", include("brokers.urls")),
     path('auth/google/', GoogleLoginJWTView.as_view(), name='google-login'),

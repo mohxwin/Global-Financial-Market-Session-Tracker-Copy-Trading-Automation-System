@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import CostumeUser
 
 
 
@@ -7,11 +7,11 @@ class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     class Meta:
-        model = User
-        fields = ["email", "full_name", "password"]
+        model = CostumeUser
+        fields = ["first_name", "last_name", "email", "password", "role"]
 
     def create(self, validated_data):
-        user = User.objects.create_user(
+        user = CostumeUser.objects.create_user(
             email=validated_data["email"],
             password=validated_data["password"]
         )

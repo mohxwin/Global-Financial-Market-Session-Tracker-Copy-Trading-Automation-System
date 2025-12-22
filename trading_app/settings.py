@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'accounts.CostumeUser'
+
+
 
 # Application definition
 
@@ -39,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework_simplejwt.token_blacklist",
+    "rest_framework_simplejwt",
+    'rest_framework.authtoken',
+    "rest_framework",
     "django.contrib.sites",
     "allauth",
     "allauth.account",
@@ -49,7 +56,20 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_static',
     'dj_rest_auth',
     'dj_rest_auth.registration',
+    'accounts',
+    'brokers',
+    'copy_trading',
+    'notifications',
+    'referrals',
+    'trading',
+    'wallets'
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 SITE_ID = 1
 
@@ -63,6 +83,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "accounts.middleware.LoginTrackingMiddleware",
     'django_otp.middleware.OTPMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 WEBHOOK_SECRET = "YOUR_SECRET_HERE"
@@ -110,7 +131,21 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+
+
+
 
 
 REST_USE_JWT = True
