@@ -1,7 +1,8 @@
 from django.urls import path
+from .views import CoinWalletView
 
 
 
 urlpatterns = [
-    # path('', name='home')
+    path('', CoinWalletView.as_view(), name='coin_wallet'),
 ]
