@@ -1,0 +1,9 @@
+__pycache__
+trade_env/
+.env
+.vscode/
+.ipynb_checkpoints
+*.pyc
+.DS_Store
+.mypy_cache/
+.pytest_cache/
